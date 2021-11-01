@@ -19,7 +19,4 @@ const Navigation = () => {
     )
 }
 
-const Holder = () => <View></View>
-
 export default Navigation
-

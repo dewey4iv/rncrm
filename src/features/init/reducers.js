@@ -6,6 +6,8 @@ const initialState = {
 }
 
 const reducers = {
+    initResult: (state, { payload }) => {
+    },
 }
 
 const slice = createSlice({
@@ -15,6 +17,7 @@ const slice = createSlice({
 })
 
 export const {
+    initResult,
 } = slice.actions
 
 export default slice.reducer
