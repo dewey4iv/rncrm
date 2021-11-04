@@ -1,11 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
+import * as status from '../status'
 
 const name = 'init'
 
 const initialState = {
+    status: status.PENDING,
 }
 
 const reducers = {
+    init: (state) => {
+    },
     initResult: (state, { payload }) => {
     },
 }
