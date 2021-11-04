@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useIsFocused } from '@react-navigation/native'
+import { useIsFocused, useNavigation } from '@react-navigation/native'
+import * as states from '../status'
 import * as actions from './reducers'
 
 export const useLoadCustomers = () => {
@@ -40,6 +41,17 @@ export const useListCustomersByRegion = (region) => {
 export const useNewCustomer = () => {
     const dispatch = useDispatch()
 
+    const { navigate } = useNavigation()
+
+    const status = useSelector(state => state.customer.create.status)
+
+    useEffect(() => {
+        if (status === states.SUCCESS) {
+            dispatch(actions.createCustomerReset())
+            navigate('ListRegions')
+        }
+    }, [status])
+
     return {
         onSubmit: () => dispatch(actions.createCustomer())
     }
@@ -48,9 +60,16 @@ export const useNewCustomer = () => {
 export const useEditCustomer = (customerID) => {
     const dispatch = useDispatch()
 
+    const { navigate } = useNavigation()
+
+    const status = useSelector(state => state.customer.edit.status)
+
     useEffect(() => {
-        // dispatch action to set fields to be the matching customer
-    }, [])
+        if (status === states.SUCCESS) {
+            dispatch(actions.editCustomerReset())
+            navigate('ListRegions')
+        }
+    }, [status])
 
     return {
         onSubmit: () => dispatch(actions.editCustomer())

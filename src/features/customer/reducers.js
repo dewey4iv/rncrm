@@ -54,6 +54,9 @@ const reducers = {
         state.create.status = status.ERROR
         state.create.error = payload
     },
+    createCustomerReset: (state) => {
+        state.create = initialState.create
+    },
 
     showCustomer: (state, { payload }) => {
         const customer = customers.find(c => c.id = payload)
@@ -80,6 +83,9 @@ const reducers = {
     editCustomerError: (state) => {
         state.edit.status = status.ERROR
         state.edit.error = payload
+    },
+    editCustomerReset: (state) => {
+        state.edit = initialState.edit
     },
 
     setFormField: (state, { payload }) => {
@@ -116,12 +122,14 @@ export const {
     createCustomer,
     createCustomerResult,
     createCustomerError,
+    createCustomerReset,
     showCustomer,
     showCustomerResult,
     showCustomerError,
     editCustomer,
     editCustomerResult,
     editCustomerError,
+    editCustomerReset,
     setFormField,
     resetForm,
     clear,
