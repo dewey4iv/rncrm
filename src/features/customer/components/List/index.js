@@ -18,7 +18,7 @@ const List = () => {
             {(customers && customers.length > 0) ? (
                 <FlatList
                     data={customers || []}
-                    renderItem={Row}
+                    renderItem={(props) => <Row {...props} />}
                     keyExtractor={(item) => item.id}
                 />
             ) : (

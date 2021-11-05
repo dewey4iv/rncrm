@@ -73,7 +73,7 @@ const reducers = {
         state.show = initialState.show
     },
 
-    editCustomer: (state) => {
+    editCustomer: (state, { payload }) => {
         state.edit.status = status.REQUESTING
     },
     editCustomerResult: (state, { payload }) => {
@@ -88,6 +88,9 @@ const reducers = {
         state.edit = initialState.edit
     },
 
+    setForm: (state, { payload }) => {
+        state.form.fields = payload
+    },
     setFormField: (state, { payload }) => {
         const current = state.form.fields
         const { field, value } = payload
@@ -130,6 +133,7 @@ export const {
     editCustomerResult,
     editCustomerError,
     editCustomerReset,
+    setForm,
     setFormField,
     resetForm,
     clear,

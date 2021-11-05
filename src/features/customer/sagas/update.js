@@ -10,21 +10,20 @@ export function* takeEditCustomer(action) {
     try {
         const customerID = action.payload
 
-        const customers = yield select(state => state.customer.list.customers)
+        const currentCustomers = yield select(state => state.customer.list.customers)
         const fields = yield select(state => state.customer.form.fields)
 
-        const customerIndex = customers.findIndex(c => c.id === customerID)
+        const customers = currentCustomers.map(c => {
+            if (c.id !== customerID) return c
 
-        customers[customerIndex] = {
-            id: customerID,
-            ...fields,
-        }
+            return fields
+        })
 
         yield services.save(customers)
 
-        yield put(actions.createCustomerResult(customers))
+        yield put(actions.editCustomerResult(customers))
     } catch (error) {
-        yield put(actions.createCustomerError(error.toString()))
+        yield put(actions.editCustomerError(error.toString()))
     }
 }
 

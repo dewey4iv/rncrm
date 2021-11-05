@@ -63,6 +63,13 @@ export const useEditCustomer = (customerID) => {
     const { navigate } = useNavigation()
 
     const status = useSelector(state => state.customer.edit.status)
+    const customers = useSelector(state => state.customer.list.customers)
+
+    useEffect(() => {
+        const customer = customers.find(c => c.id === customerID)
+
+        dispatch(actions.setForm(customer))
+    }, [customerID])
 
     useEffect(() => {
         if (status === states.SUCCESS) {
@@ -72,7 +79,7 @@ export const useEditCustomer = (customerID) => {
     }, [status])
 
     return {
-        onSubmit: () => dispatch(actions.editCustomer())
+        onSubmit: () => dispatch(actions.editCustomer(customerID))
     }
 }
 
